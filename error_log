@@ -1,0 +1,2 @@
+[18-Jul-2019 14:12:56 Asia/Kolkata] PHP Parse error:  syntax error, unexpected end of file, expecting function (T_FUNCTION) in /home/theclas1/public_html/RajShree_Software/application/models/Product_model.php on line 570
+[18-Jul-2019 17:53:01 Asia/Kolkata] PHP Fatal error:  Cannot redeclare Product_model::updateProductSave() in /home/theclas1/public_html/RajShree_Software/application/models/Product_model.php on line 247

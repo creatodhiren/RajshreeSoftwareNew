@@ -1,0 +1,10 @@
+body {
+
+	background-image: url("assets/bg.jpg");
+}
+/*****/
+@media screen and (max-width: 767px){
+table#example2{
+       overflow-x: scroll;
+}
+}
