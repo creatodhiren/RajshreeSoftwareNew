@@ -702,14 +702,14 @@ $.ajax({
 
 
 $(function() {
-	$('#product_type').multiselect({
+	/*$('#product_type').multiselect({
         includeSelectAllOption: true,
 		maxHeight:150  
-    });
-	$('#grade').multiselect({
+    });*/
+ /*$('#grade').multiselect({
         includeSelectAllOption: true,
 		maxHeight:150  
-    });
+    });*/
     $('#thickness').multiselect({
         includeSelectAllOption: true,
 		maxHeight:150  

@@ -106,8 +106,8 @@
                </div>
                <div class="form-group col-md-4">
                   <label class="form-label">Product Type</label>
-                  <select class="form-control" id="product_type" autocomplete="off" name="product_type[]"  required="" aria-required="true" multiple="multiple" style="display:none;">
-                    <?php 	echo $prod_type = $product_datas['product_type']?>
+                  <select class="form-control" id="product_type" autocomplete="off" name="product_type"  required="" aria-required="true">
+                    <?php 	 $prod_type = $product_datas['product_type']?>
                     <?php foreach ($product_type as $product_types) {
                     ?> 
                     <option value="<?php echo $product_types['option_name']; ?>"<?php if($prod_type == $product_types['option_name']){echo "selected";} ?>><?php echo $product_types['option_name']; ?></option>
@@ -116,7 +116,7 @@
                </div>
                <div class="form-group col-md-4">
                   <label class="form-label">Grade</label>
-                  <select class="form-control" id="grade" autocomplete="off" name="grade[]"  required="" aria-required="true" multiple="multiple" style="display:none;">
+                  <select class="form-control" id="grade" autocomplete="off" name="grade"  required="" aria-required="true">
                     <option value="">Select Grade </option>
                     <?php  echo $grad = $product_datas['grade']?>
                     <?php foreach ($grade as $grades) {
@@ -148,20 +148,29 @@
                </div>
 			   <div class="form-group col-md-4">
                   <label class="form-label">Color Type</label>
+                  <?php $colorval = implode(",",json_decode($product_datas['color'])); 
+
+                  ?>
                   <select class="form-control" id="color_id1" autocomplete="off" name="color_id[]"  required="" aria-required="true" >
-                    <option value="<?php echo $product_datas['option_id']?>"><?php echo $product_datas['option_name']?></option>
+                    <option value="<?php echo $product_datas['option_name']?>"><?php echo $product_datas['option_name']?></option>
                   </select>
                </div>
 
                
                 <div class="form-group col-md-4">
                   <label class="form-label">Thickness</label>
-                  <select class="form-control" id="thickness" autocomplete="off" name="thickness[]"  required="" aria-required="true" multiple="multiple" style="display:none;">
+                 
+                  <select class="form-control" id="thickness" autocomplete="off" name="thickness[]"  required="" aria-required="true" multiple="multiple">
                     <option value="">Select Thickness </option>
-                    <?php $thick = $product_datas['thickness'];?>
+      
+                    <?php  $thick = json_decode($product_datas['thickness']); ?>
                     <?php foreach ($thickness as $thickness) {
                     ?> 
-                    <option value="<?php echo $thickness['option_name']; ?>"<?php if($thick == $thickness['option_name']){echo "selected";} ?>><?php echo $thickness['option_name']; ?></option>
+                    <option value="<?php echo $thickness['option_name']; ?>"<?php foreach($thick as $allthickes){
+                        if( $thickness['option_name'] ==$allthickes){
+                           echo "selected";
+                        }
+                    } ?>><?php echo $thickness['option_name']; ?></option>
                   <?php } ?>
                   </select>
                </div>
@@ -171,12 +180,7 @@
 			<div class="form-group col-md-4">
                   <label class="form-label">Design</label>
                   <select class="form-control"  id="design" autocomplete="off" name="design[]"  required="" aria-required="true" multiple="multiple" >
-                       <?php echo $design_name = $product_datas['design'];
-                      /* $design1 = $this->Product_model->product_design($design_id);
-					  
-                      $opt_cls = $design1[0]['option_class'];
-                      $opt_name = $design1[0]['option_name'];
-                      print_r($design1); */
+                       <?php echo $design_name = json_decode($product_datas['design']);
                       ?>                
                     <?php foreach ($design as $designs) {
                     ?> 

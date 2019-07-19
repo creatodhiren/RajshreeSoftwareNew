@@ -307,7 +307,7 @@ public function select_child(){
 	 $data1=$this->Product_model->get_data('tbl_product_option',array('option_class'=>$option),'','','','option_id,option_name');
 	 
 	 foreach($data1 as $data){
-	 echo '<option value="'.$data['option_id'].'">'.$data['option_name'].'</option>';
+	 echo '<option value="'.$data['option_name'].'">'.$data['option_name'].'</option>';
 	 //echo '<input type="checkbox" value="'.$data['option_id'].'" name="chk_color">'.$data['option_name'].'<br>';
 	 }
 	 //print_r($data1['design']);
@@ -336,7 +336,7 @@ public function edit_product_form(){
   $data['totalGotPO']= $this->login_model->countGotPo();
   
   $data1['product_data'] = $this->Product_model->getDatabyProductid($id);
-   $data1['category_list']= $this->Product_model->get_category_list();
+  $data1['category_list']= $this->Product_model->get_category_list();
   $data1['color_list']= $this->Product_model->get_color_list();
   $data1['product_type']=$this->Product_model->get_data('tbl_product_option',array('option_class'=>'Product Type'),'','','','option_id,option_name');
   $data1['sale_ac']=$this->Product_model->get_data('tbl_product_option',array('option_class'=>'Sale A/c'),'','','','option_id,option_name');

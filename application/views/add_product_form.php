@@ -100,7 +100,8 @@
                </div>
                <div class="form-group col-md-4">
                   <label class="form-label">Product Type</label>
-                  <select class="form-control" id="product_type" autocomplete="off" name="product_type[]"  required="" aria-required="true" multiple="multiple">
+                  <select class="form-control" id="product_type" autocomplete="off" name="product_type"  required="" aria-required="true">
+                  <option value="">Select Product Type</option>
                     <?php foreach ($product_type as $product_types) {
                     ?> 
                     <option value="<?php echo $product_types['option_name']; ?>"><?php echo $product_types['option_name']; ?></option>
@@ -109,7 +110,8 @@
                </div>
                <div class="form-group col-md-4">
                   <label class="form-label">Grade</label>
-                  <select class="form-control" id="grade" autocomplete="off" name="grade[]"  required="" aria-required="true" multiple="multiple">
+                  <select class="form-control" id="grade" autocomplete="off" name="grade"  required="" aria-required="true">
+                  <option value="">Select Grade</option>
                     <?php foreach ($grade as $grades) {
                     ?> 
                     <option value="<?php echo $grades['option_name']; ?>"><?php echo $grades['option_name']; ?></option>

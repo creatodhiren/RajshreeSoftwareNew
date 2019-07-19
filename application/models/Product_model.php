@@ -359,60 +359,35 @@ if(!empty($_FILES['product_image']['name'])){
   else{
     $picture="";
   }
-/******multiple select loop********/
-foreach($productType as $pType){
-	foreach($grade as $pGrade){
-		foreach($color_id as $pColor){
-	         foreach($thickness as $pThickness){
-				     foreach($design as $pDesign){
-						 //foreach($sizeFeet as $pSize){
-		                     /**********************************/
+
 
 							 $insertarr = array(
 										   'product_name' => $product_code,
 										   'category_id'  => $category_id,
 										   'image_name'   => $picture,
-										   'thickness'    => $pThickness,
+										   'thickness'    => json_encode($thickness),
 										   'status'       => 'Active',
 										   'hsn_code'     => $hsn_code,
 										   'stock_UOM'    => $this->input->post('stock_UOM'),
 										   'double_Qty'   => $product_qty,
 										   'sale_ac'      => $this->input->post('sale_ac'),
 										   'sale_return_ac'=> $this->input->post('sale_return_ac'),
-										   'product_type' =>$pType ,
-										   'grade' => $pGrade,
-										   'color' => $pColor,
-										   'design' => $pDesign ,
-										   'size_feet' =>$sizeFeet,
+										   'product_type' =>$productType,
+										   'grade' => $grade,
+										   'color' => json_encode($color_id),
+										   'design' => json_encode($design) ,
+                       'size_feet' =>$sizeFeet,
+                       'govt_price' => $govt_price,
+										   'retailer_price'   => $retail_price,
+										   'opening_stock'    => $opening_stock,
 										   'product_description' => $this->input->post('product_description')
 											); 
 
 
 							 $insert = $this->db->insert('tbl_product_details',$insertarr);
-							$insert_id = $this->db->insert_id();
-							 //print_r($insert_id);exit;
-							 $insertarr1 = array(
-										   'product_id' => $insert_id,
-										   'option_id'  => $pColor,
-										  // 'image_name'   => $product_image,
-										   'govt_price' => $govt_price,
-										   'retailer_price'   => $retail_price,
-										   'opening_stock'    => $opening_stock,
-										   //'status'       => 'Active'
-											 );
-
-							 $insert1 = $this->db->insert('tbl_product_option_details',$insertarr1);
 						 //}
-                 }
-	
-             }
-        }
-	
-    }
-	
-}
-
-$messge = array('message' => 'Product Add Successfully','class' => 'alert alert-success');
+                
+  $messge = array('message' => 'Product Add Successfully','class' => 'alert alert-success');
               $this->session->set_flashdata('product', $messge);
 
 }else{
@@ -420,17 +395,7 @@ $messge = array('message' => 'Product Add Successfully','class' => 'alert alert-
               $this->session->set_flashdata('product', $messge);
 }
 
-/*
- if($insert){
-       $messge = array('message' => 'Product Add successfully','class' => 'alert alert-success');
-              $this->session->set_flashdata('product', $messge);
-
-    }else{
-        $messge = array('message' => 'Product Already Exist ','class' => 'alert alert-danger');
-              $this->session->set_flashdata('product', $messge);
-  
-    }
-*/}
+}
 
 
 function check_product($product_name,$category_id) {
@@ -444,7 +409,7 @@ function check_product($product_name,$category_id) {
   $query = $this->db->get();
   return $query->num_rows();
 }
-function getproductList(){
+/*function getproductList(){
    $this->db->select('tpd.*,tpo.option_name,tpod.product_id,tpc.category_name,tpod.option_id,tpod.govt_price,tpod.retailer_price,tpod.opening_stock');
     $this->db->from('tbl_product_details tpd');
     $this->db->join('tbl_product_option_details tpod','tpod.product_id=tpd.id');
@@ -454,14 +419,17 @@ function getproductList(){
     $this->db->group_by("tpd.id");
     $query = $this->db->get(); 
     return $query->result_array();
+}*/
+function getproductList(){
+   $query=  $this->db->query("SELECT tpd.color,tpd.thickness , tpd.image_name,tpd.product_name,tpd.size_feet, tpc.category_name ,tpd.govt_price,tpd.retailer_price,tpd.id FROM `tbl_product_details` as tpd join tbl_product_category as tpc on tpd.category_id=tpc.id");
+  $query=  $query->result_array(); 
+   return $query;
 }
+
 function getDatabyProductid($id){
-    $this->db->select('tpd.*,tpod.*,tpo.*');
-    $this->db->from('tbl_product_details tpd');
-    $this->db->join('tbl_product_option_details tpod','tpod.product_id=tpd.id');
-    $this->db->join('tbl_product_option tpo','tpo.option_id=tpod.option_id');
-    $this->db->where('tpd.id',$id);
-    $this->db->order_by("tpd.id", "desc");
+    $this->db->select('*');
+    $this->db->from('tbl_product_details');
+    $this->db->where('id',$id);
     $query = $this->db->get(); 
     return $query->result_array();
 

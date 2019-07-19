@@ -56,10 +56,11 @@
                   	<?php
                      //print_r($product_data);
                      $x=1;
-                  	 foreach($product_data as $lis){?>
+                  	 foreach($product_data as $lis){
+                         ?>
                      <tr class="odd gradeX">
                      	<td><?php echo $x++; ?></td>
-                        <td><?php echo $lis['product_name']; ?></td>
+                        <td id="product_name"><?php echo $lis['product_name']; ?></td>
                         <td>
                            <?php if(!empty($lis['image_name'])){ ?>
                            <img style="width:100px;height:80px;" src="<?php echo base_url(); ?>upload/<?php echo  $lis['image_name']; ?>">
@@ -69,8 +70,8 @@
                            <?php } ?>
                         </td>
                         <td><?php echo $lis['category_name']; ?></td>
-                        <td><?php echo $lis['option_name']; ?></td>
-                        <td><?php echo $lis['thickness']; ?> (<?php echo $lis['size_feet']; ?>)</td>
+                        <td><?php echo  implode(",",json_decode($lis['color'])); ?></td>
+                        <td><?php echo implode(",",json_decode($lis['thickness'])); ?> (<?php echo $lis['size_feet']; ?>)</td>
                         <td>Rs. <b style="color:green;"><?php echo $lis['govt_price']; ?></b></td>
                         <td>Rs. <b style="color:green;"><?php echo $lis['retailer_price']; ?></b></td>
                         <td>
@@ -89,3 +90,9 @@
       </div>
    </div>
 </div>
+<script>
+//$(document).ready(function(){
+// var id = $('#product_name').text();
+// alert(id);
+//});
+</script>
