@@ -710,6 +710,7 @@ $(function() {
         includeSelectAllOption: true,
 		maxHeight:150  
     });*/
+   
     $('#thickness').multiselect({
         includeSelectAllOption: true,
 		maxHeight:150  

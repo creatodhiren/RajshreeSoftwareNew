@@ -125,7 +125,7 @@
            
                <div class="form-group col-md-4">
                   <label class="form-label">Color</label>
-                  <select class="form-control" id="selectcolor" autocomplete="off" name=""  required="" aria-required="true">
+                  <select class="form-control" id="selectcolor" autocomplete="off" name="parent_color"  required="" aria-required="true">
                     <option value="">Select Color</option>
                     <?php 
                     foreach ($color_list as $key => $value) {

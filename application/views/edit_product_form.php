@@ -148,11 +148,14 @@
                </div>
 			   <div class="form-group col-md-4">
                   <label class="form-label">Color Type</label>
-                  <?php $colorval = implode(",",json_decode($product_datas['color'])); 
-
+                 
+                  <select class="form-control" id="color_id1" autocomplete="off" name="color_id[]"  required="" aria-required="true" multiple="multiple" >
+                  <?php $colorval = json_decode($product_datas['color']); 
+               
                   ?>
-                  <select class="form-control" id="color_id1" autocomplete="off" name="color_id[]"  required="" aria-required="true" >
-                    <option value="<?php echo $product_datas['option_name']?>"><?php echo $product_datas['option_name']?></option>
+         <?php  foreach($colorval as $col){?>
+                    <option value="<?php echo $col;?>" selected><?php echo $col;?></option>
+          <?php       }?>
                   </select>
                </div>
 
@@ -184,7 +187,10 @@
                       ?>                
                     <?php foreach ($design as $designs) {
                     ?> 
-                    <option value="<?php echo $designs['option_name']; ?>" <?php if($design_name == $designs['option_name']){ echo "selected";
+                    <option value="<?php echo $designs['option_name']; ?>" <?php foreach($design_name as $des){
+                        if( $designs['option_name'] ==$des){
+                           echo "selected";
+                        }
                     } ?>><?php echo $designs['option_name']; ?></option>
                   <?php } ?>
                   </select>
@@ -248,18 +254,7 @@
    </div>
 </div>
 <script>
-//   $(document).ready(function() {
-//   //$("#double_Qty").val("<?php echo $product_datas['double_Qty']?>");
-//   $("#sale_ac").val("<?php echo $product_datas['sale_ac']?>");
-//   $("#sale_return_ac").val("<?php echo $product_datas['sale_return_ac']?>");
-//   $("#product_category").val("<?php echo $product_datas['category_id'];?>");
-//   $("#product_type").val("<?php echo $product_datas['product_type']?>");
-//   $("#grade").val("<?php echo $product_datas['grade']?>");
-//   $("#color_id").val("<?php echo $product_datas['option_id']?>");
-//   $("#design").val("<?php echo $product_datas['design']?>");
-   
 
-// });
 
 /*************Get caculateUom ********************/
 
@@ -299,7 +294,11 @@ $.ajax({
   data: {option : color},
    success: function(html){
     $("#color_id1").html(html);
+
   }
 });  
 });
+/*****************/
+
+$('#color_id1').multiselect();
 </script>
