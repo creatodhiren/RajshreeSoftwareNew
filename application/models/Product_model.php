@@ -313,6 +313,7 @@ function productSave(){
   
   $productType = $this->input->post('product_type');
   $grade = $this->input->post('grade');
+  $parent_color = $this->input->post('parent_color');
   $color_id = $this->input->post('color_id');
   $thickness = $this->input->post('thickness');
   $design = $this->input->post('design');
@@ -373,7 +374,8 @@ if(!empty($_FILES['product_image']['name'])){
 										   'sale_ac'      => $this->input->post('sale_ac'),
 										   'sale_return_ac'=> $this->input->post('sale_return_ac'),
 										   'product_type' =>$productType,
-										   'grade' => $grade,
+                       'grade' => $grade,
+                       'parent_color' => $parent_color,
 										   'color' => json_encode($color_id),
 										   'design' => json_encode($design) ,
                        'size_feet' =>$sizeFeet,
@@ -449,6 +451,7 @@ function updateProductDetailsSave(){
   $old_image = $this->input->post('old_image');
   $category_id = $this->input->post('product_category');
   $product_type = $this->input->post('product_type');
+  $parent_color = $this->input->post('parent_color');
   $color_id = $this->input->post('color_id');
   $thickness = $this->input->post('thickness');
   $grade = $this->input->post('grade');
@@ -486,53 +489,31 @@ $config['upload_path'] = 'upload/';
  $picture= $old_image;
 }
 
-/******multiple select loop********/
-foreach($product_type as $pType){
-	foreach($grade as $pGrade){
-		foreach($color_id as $pColor){
-	         foreach($thickness as $pThickness){
-				     foreach($design as $pDesign){
-						 //foreach($sizeFeet as $pSize){
-		                     /**********************************/
+
 							$insertarr = array(
                'product_name' => $product_name,
                'category_id'  => $category_id,
                'image_name'   => $picture,
-               'thickness'    => $pThickness,
+               'thickness'    => json_encode($thickness),
                'hsn_code'     => $hsn_code,
                'stock_UOM'    => $this->input->post('stock_UOM'),
                'double_Qty'   => $product_qty,
                'sale_ac'      => $this->input->post('sale_ac'),
                'sale_return_ac'=> $this->input->post('sale_return_ac'),
-               'product_type' => $pType,
-               'grade' =>$pGrade ,
-               'color' => $pColor,
-               'design' =>$pDesign ,
+               'product_type' => $product_type,
+               'grade' =>$grade ,
+               'parent_color' =>$parent_color ,
+               'color' =>json_encode($color_id),
+               'design' =>json_encode($design) ,
                'size_feet' => $this->input->post('size'),
                'product_description' => $this->input->post('product_description')
                
                  ); 
-$insertarr1 = array(
-               'option_id'  => $pColor,
-               'govt_price' => $govt_price,
-               'retailer_price'=> $retail_price,
-               'opening_stock'=> $opening_stock
-               ); 
               
 $this->db->where('id', $id); 
 $update = $this->db->update('tbl_product_details',$insertarr);
-$this->db->where('product_id', $id); 
-$update = $this->db->update('tbl_product_option_details',$insertarr1);
+
 							
-						 //}
-                 }
-	
-             }
-        }
-	
-    }
-	
-}
 
 if($update){
  $messge = array('message' => 'Product Update successfully','class' => 'alert alert-success');

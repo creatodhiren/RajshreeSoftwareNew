@@ -710,7 +710,11 @@ $(function() {
         includeSelectAllOption: true,
 		maxHeight:150  
     });*/
-   
+    
+    $('#color_id1').multiselect({
+      includeSelectAllOption: true,
+       maxHeight:150  
+     });
     $('#thickness').multiselect({
         includeSelectAllOption: true,
 		maxHeight:150  

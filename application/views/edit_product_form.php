@@ -131,13 +131,13 @@
             <div class="row">
                <div class="form-group col-md-4">
                   <label class="form-label">Color</label>
-                  <select class="form-control" id="selectcolor" autocomplete="off" name=""  required="" aria-required="true">
+                  <select class="form-control" id="selectcolor" autocomplete="off" name="parent_color"  required="" aria-required="true">
                     <option value="">Select Color</option>
-                    <?php $opt = $product_datas['option_class']?>
+                    <?php $opt = $product_datas['parent_color'];
+                    ?>
                     
                     <?php 
-                
-                    foreach ($color_list as $key => $value) {
+                    foreach ($color_list as $key => $value){
                     ?>
                     <option value="<?php  echo $value['option_name']; ?>" <?php if($opt == $value['option_name'] ){ echo "selected";
                     }?>><?php echo $value['option_name']; ?></option>
@@ -146,16 +146,28 @@
                     ?>
                   </select>
                </div>
-			   <div class="form-group col-md-4">
+			      <div class="form-group col-md-4">
                   <label class="form-label">Color Type</label>
                  
                   <select class="form-control" id="color_id1" autocomplete="off" name="color_id[]"  required="" aria-required="true" multiple="multiple" >
-                  <?php $colorval = json_decode($product_datas['color']); 
-               
+                  <?php 
+                  $dataColor=$this->Product_model->get_data('tbl_product_option',array('option_class'=>$opt),'','','','option_id,option_name');
+                  $colorval = json_decode($product_datas['color']);
                   ?>
-         <?php  foreach($colorval as $col){?>
-                    <option value="<?php echo $col;?>" selected><?php echo $col;?></option>
-          <?php       }?>
+   
+                 <option value="" >Select Color </option>
+                 <?php
+
+                 foreach($dataColor as $col ){
+                  ?>
+                  <option value="<?php echo $col['option_name']; ?>" <?php foreach($colorval as $colorvals){
+                        if( $col['option_name'] ==$colorvals){
+                           echo "selected";
+                        }
+                    } ?>><?php echo $col['option_name']; ?></option>
+                  <?php 
+                  } 
+                 ?>
                   </select>
                </div>
 
@@ -253,10 +265,10 @@
       </div>
    </div>
 </div>
-<script>
 
 
 /*************Get caculateUom ********************/
+<script>
 
 
 function caculateUom(e){
@@ -300,5 +312,26 @@ $.ajax({
 });
 /*****************/
 
-$('#color_id1').multiselect();
+
+$(document).ready(function(){
+  var parent_color = $("#selectcolor").val();
+  //alert(parent_color);
+   var col_array = '<?php echo $product_datas['color']; ?>';
+   //alert(col_array);
+  var base_url =document.getElementById("base_url").value;
+  $.ajax({
+  type: "POST",
+  url: base_url+"Product/getColorList",
+  //dataType: "json",
+  data: {option : parent_color},
+  success: function(html){
+     
+     //$("#color_id1").html(html);
+    //alert(col_array);
+   }
+  }); 
+
+ });
+
+
 </script>

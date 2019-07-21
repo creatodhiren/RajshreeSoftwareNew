@@ -124,7 +124,9 @@ input#tot_amount {
                <input type="hidden" value="" name="salseexe_id" id="salse_id"/>
                <input type="hidden" value="" name="dealer_id" id="dealer_id"/>
 			    <input type="hidden" value="<?php echo $dealer_id; ?>" name="dealer_segment" id="dealer_seg"/>
-               <?php //print_r($product_list); ?>
+               <?php 
+               //echo "<pre>";
+               //print_r($product_list);  die;?>
                <table  class="table table-striped " id="rowappend25">
                   <thead>
                      <tr>

@@ -23,6 +23,9 @@ class Product extends CI_Controller {
 				 $data1['dealer_segmet']=$this->Common_model->getDealerSegment($user_id); 
 	    } 
         $data1['product_list']= $this->Product_model->getProductList();
+        echo "<pre>";
+        print_r( $data1['product_list']);
+        die;
         $data1['vendor_list'] =   $this->Vendor_model->getAllVendorList();
         $login_data = $this->session->userdata('login_data');
         $data1['login_id'] = $login_data[0]['user_id'];

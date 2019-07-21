@@ -54,7 +54,8 @@
                   </thead>
                   <tbody>
                   	<?php
-                     //print_r($product_data);
+                     //echo "<pre>";
+                     //print_r($product_data); die();
                      $x=1;
                   	 foreach($product_data as $lis){
                          ?>

@@ -312,6 +312,16 @@ public function select_child(){
 	 }
 	 //print_r($data1['design']);
 }
+
+public function getColorList(){
+  $option = $this->input->post('option');
+  $data1=$this->Product_model->get_data('tbl_product_option',array('option_class'=>$option),'','','','option_id,option_name');
+
+  foreach($data1 as $data){
+  echo '<option value="'.$data['option_name'].'">'.$data['option_name'].'</option>';
+  }
+}
+
 public function SaveProduct(){
  $data1['product_data']= $this->Product_model->productSave();
  redirect('Product_list');
