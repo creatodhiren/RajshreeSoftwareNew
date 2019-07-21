@@ -42,11 +42,10 @@ if($login_role == 'admin' || $login_role == 'Sub Admin'){
 }
 
 function editProductDataFatch($id){
-$this->db->select('tppd.product_id,tppd.po_id,tppd.quantity,tpd.product_name,tpd.size_feet,tpd.thickness,tpd.category_id,tpc.category_name,tpo.vendor_id,tpo.purchase_order_id,tmu.name,tmu.email,tmu.segment,tmu.mobile,tpod.retailer_price,tpod.govt_price,tpo.po_date');
+$this->db->select('tppd.product_id,tppd.po_id,tppd.quantity,tppd.prod_category,tppd.prod_size,tppd.prod_thick,tpd.category_id,tpc.category_name,tpo.vendor_id,tpo.purchase_order_id,tmu.name,tmu.email,tmu.segment,tmu.mobile,tppd.rate,tpo.po_date');
 $this->db->from('tbl_po_product_details tppd');
 $this->db->join('tbl_product_details tpd','tppd.product_id=tpd.id');
 $this->db->join('tbl_product_category tpc','tpd.category_id=tpc.id');
-$this->db->join('tbl_product_option_details tpod','tpod.product_id=tpd.id');
 $this->db->join('tbl_purchase_order tpo','tpo.id=tppd.po_id');
 $this->db->join('tbl_manage_user tmu','tmu.user_id=tpo.vendor_id');
 $this->db->where('tppd.po_id',$id);
@@ -165,8 +164,9 @@ function getGenratedSoList(){
 	$this->db->join('tbl_manage_user tmu','tmu.user_id=tso.vendor_id');
 	$this->db->where('tso.status','pending');
 	$this->db->order_by("tso.id", "desc");
-    $query = $this->db->get(); 
-    return $query->result_array();
+  $query = $this->db->get(); 
+  //echo  $this->db->last_query();
+  return $query->result_array();
 
 }
 
@@ -308,23 +308,11 @@ function getFinalInvoiceData($id){
 return $query->result_array();
 }
 function getProductDetailsForInvoice($id){
-  /* $this->db->select('tspo.*,tpd.*,tpod.*,tso.total as taxable_amount,tso.vendor_id,tso.sales_order_id,tso.	so_date,tmu.gstn,tmu.mobile,tmu.state,tmu.city,s.name as State,c.name as city,tpo.po_expire_date');
+$this->db->select('tspo.*,tpd.*,tppd.*,tso.total as taxable_amount,tso.vendor_id,tso.sales_order_id,tso.	so_date,tmu.gstn,tmu.mobile,tmu.state,tmu.city,tpo.po_expire_date,s.name as State,c.name as city');
   $this->db->from('tbl_sales_product_order tspo');
   $this->db->join('tbl_sales_order tso','tso.id=tspo.so_id');
-  $this->db->join('tbl_product_option_details tpod','tpod.product_id=tspo.product_id');
   $this->db->join('tbl_product_details tpd','tpd.id=tspo.product_id');
-  $this->db->join('tbl_manage_user tmu','tmu.user_id=tso.vendor_id');
-   $this->db->join('tbl_purchase_order tpo','tpo.vendor_id=tso.vendor_id');
-  $this->db->join('states s','tmu.state=s.id');
-  $this->db->join('cities c','tmu.city=c.id');
-  $this->db->where('tspo.so_id',$id);
-  $query = $this->db->get(); 
-return $query->result_array(); */
-$this->db->select('tspo.*,tpd.*,tpod.*,tso.total as taxable_amount,tso.vendor_id,tso.sales_order_id,tso.	so_date,tmu.gstn,tmu.mobile,tmu.state,tmu.city,tpo.po_expire_date,s.name as State,c.name as city');
-  $this->db->from('tbl_sales_product_order tspo');
-  $this->db->join('tbl_sales_order tso','tso.id=tspo.so_id');
-  $this->db->join('tbl_product_option_details tpod','tpod.product_id=tspo.product_id');
-  $this->db->join('tbl_product_details tpd','tpd.id=tspo.product_id');
+  $this->db->join('tbl_po_product_details tppd','tppd.product_id=tpd.id');
   $this->db->join('tbl_manage_user tmu','tmu.user_id=tso.vendor_id');
   $this->db->join('tbl_purchase_order tpo','tpo.vendor_id=tso.vendor_id');
   $this->db->join('states s','tmu.state=s.id');
@@ -333,7 +321,7 @@ $this->db->select('tspo.*,tpd.*,tpod.*,tso.total as taxable_amount,tso.vendor_id
   $this->db->group_by('tspo.id');
   $query = $this->db->get(); 
   return $query->result_array();
- //echo $this->db->last_query();
+  //echo $this->db->last_query();
 }
 function getInvoiceList(){
   $this->db->select('ti.*,tmu.name');

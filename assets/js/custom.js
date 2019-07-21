@@ -156,68 +156,78 @@ function getproductprice(id,row){
    success: function(data){
 	var id='';
   var id = data[0]['id'];
-  alert(id);
+  //alert(id);
     var selOptstype = "";
     var selOptsize = "";
     var selOptcolor = "";
     var selOptgrade = "";
     var selOptdesign = "";
-    var product_type = data[0]['product_type'];
-    $('#ptype_'+row).html(product_type);
+    var selOptthickness ="";
+    
 			//product type
-            // for (i=0;i<data.type.length;i++)
-            // {
-            //     var product_type = data.type[i]['product_type'];
-            //     selOptstype += "<option value='"+product_type+"'>"+product_type+"</option>";
-            // }
-            // $('#ptype_'+row).html(selOptstype);
+            
+             var product_type = data[0]['product_type'];
+             selOptstype += "<option value='"+product_type+"'>"+product_type+"</option>";
+             $('#ptype_'+row).html(selOptstype);
 			
 			//product size
-			// for (i=0;i<data.size.length;i++)
-      //       {
-      //           var size = data.size[i]['size_feet'];
-      //           selOptsize += "<option value='"+size+"'>"+size+"</option>";
-      //       }
-      //       $('#size_'+row).html(selOptsize);
+		
+            var size = data[0]['size_feet'];
+            selOptsize += "<option value='"+size+"'>"+size+"</option>";
+            $('#size_'+row).html(selOptsize);
 			
-			//product color
-			// for (i=0;i<data.color.length;i++)
-      //       {
-      //           var color = data.color[i]['color'];
-      //           selOptcolor += "<option value='"+color+"'>"+color+"</option>";
-      //       }
-      //       $('#pcolor_'+row).html(selOptcolor);
+      //product color
+      
+      var color = data[0]['color'];
+      var color = JSON.parse(color);
+      for (i=0; i<color.length;i++)
+            {
+        selOptcolor += "<option value='"+color[i]+"'>"+color[i]+"</option>";
+       }
+      $('#pcolor_'+row).html(selOptcolor);
+	
+       //product grade
+       
+      var grade = data[0]['grade'];
+      selOptgrade += "<option value='"+grade+"'>"+grade+"</option>";
+      $('#pgrade_'+row).html(selOptgrade);
 			
-			// //product grade
-			// for (i=0;i<data.grade.length;i++)
-      //       {
-      //           var grade = data.grade[i]['grade'];
-      //           selOptgrade += "<option value='"+grade+"'>"+grade+"</option>";
-      //       }
-      //       $('#pgrade_'+row).html(selOptgrade);
+       //product design
+      var design = data[0]['design'];
+      var design = JSON.parse(design);
+      for (i=0; i<design.length;i++)
+        {
+          selOptdesign += "<option value='"+design[i]+"'>"+design[i]+"</option>";
+       }
+       $('#pdesign_'+row).html(selOptdesign);
+
+        //product thickness
+      var thickness = data[0]['thickness'];
+      var thickness = JSON.parse(thickness);
+      for (i=0; i<thickness.length;i++)
+        {
+          selOptthickness += "<option value='"+thickness[i]+"'>"+thickness[i]+"</option>";
+       }
+       $('#pthick_'+row).html(selOptthickness);
+
+       //unit price
+      var dealer_seg = $("#dealer_seg").val();
+      var retailer_price = data[0]['retailer_price'];
+      var govt_price = data[0]['govt_price'];
+     
+      if(dealer_seg == 'retailer'){
+      var prod_price=retailer_price;
+      }else{
+      var prod_price=govt_price;
+      }
+      $('#price_'+row).html(prod_price);
+      $('#price_hid_'+row).val(prod_price);
 			
-			// //product design
-			// for (i=0;i<data.design.length;i++)
-      //       {
-      //           var design = data.design[i]['design'];
-      //           selOptdesign += "<option value='"+design+"'>"+design+"</option>";
-      //       }
-      //       $('#pdesign_'+row).html(selOptdesign);
-			
-           
-           
-   //$('#size_'+row).html("<option value='"+size+"'>"+size+"</option>");
-   //$('#pcolor_'+row).html(color);
-   //$('#pgrade_'+row).html(grade);
-   //$('#pdesign_'+row).html(design);
-  
-   
-   //$('#hidd_prod_'+row).val(id);
+     $('#hidd_prod_'+row).val(id);
+     $('#product_id_'+row).val(id);
    // getSingleProductPrice(size,row);
 	
-    /*$('#price_'+row).html(data);
-    $('#price_hid_'+row).val(data);
-    */
+   
 }
 });
 }
@@ -244,7 +254,7 @@ function getproductprice(id,row){
    $('#hidd_prod_'+row).val(data[0]['id']);
 
    $('#product_id_'+row).val(data[0]['product_id']);
-    var retailer_price = data[0]['retailer_price'];
+  var retailer_price = data[0]['retailer_price'];
 	var govt_price = data[0]['govt_price'];
 	if(dealer_seg == 'retailer'){
 	 var prod_price=retailer_price;
@@ -283,20 +293,12 @@ function productlisting(id,segment){
        var subtotal=0;
       
        for(var i=0; i < count; i++){
-		   var govt_price = html['recordData'][i]['govt_price'];
-		   var retailer_price = html['recordData'][i]['retailer_price'];
-           //alert(govt_price);
-           //alert(retailer_price);
-		   if(segment == 'retailer'){
-	       var prod_price=retailer_price;
-	       }else{
-	       var prod_price=govt_price;
-	        }
-           var unitcaseprice = html['recordData'][i].packbox*html['recordData'][i].rate;
+		   var prod_price = html['recordData'][i]['rate'];
+        var unitcaseprice = html['recordData'][i].packbox*html['recordData'][i].rate;
           //subtotal +=unitcaseprice*html['recordData'][i].quantity;
          output += "<tr>";
          output += "<td>"+x+++"</td>";
-         output += "<td>"+html['recordData'][i].product_name+" "+html['recordData'][i].thickness+"mm "+html['recordData'][i].category_name+" ( "+html['recordData'][i].size_feet+" )</td>";
+         output += "<td>"+html['recordData'][i].prod_category+" ("+html['recordData'][i].prod_thick+") "+html['recordData'][i].category_name+" ( "+html['recordData'][i].prod_size+" )</td>";
          output += "<td>"+html['recordData'][i].quantity+"</td>";
          total = html['recordData'][i].quantity*prod_price;
         output += "<td><b style='color:green;'>Rs."+total+"</b></td>";
@@ -465,30 +467,19 @@ function productlistingfromPo(id,segment){
   data: {id : id},
 dataType : "JSON",
    success: function(html){
-     // alert();
        var count = Object.keys(html['recordData']).length;
        //alert(count);
-    
        var output = [];
        var x=1;
        //var subtotal=0;
        var total =0;
        for(var i=0; i < count; i++){
 		   
-		   var govt_price = html['recordData'][i]['govt_price'];
-		   var retailer_price = html['recordData'][i]['retailer_price'];
-           
-		   if(segment == 'retailer'){
-	       var prod_price=retailer_price;
-	       }else{
-	       var prod_price=govt_price;
-	        }
-        
 		   output += "<tr>";
            output += "<td>"+x+++"</td>";
-           output += "<td>"+html['recordData'][i].product_name+" "+html['recordData'][i].thickness+"mm "+html['recordData'][i].category_name+" ( "+html['recordData'][i].size_feet+")</td>";
+           output += "<td>"+html['recordData'][i].prod_category+" ("+html['recordData'][i].prod_thick+") "+html['recordData'][i].category_name+" ( "+html['recordData'][i].prod_size+")</td>";
            output += "<td>"+html['recordData'][i].quantity+"</td>";
-           total = html['recordData'][i].quantity*prod_price;
+           total = html['recordData'][i].quantity*html['recordData'][i].rate;
            output += "<td><b style='color:green;'>Rs."+total+"</b></td>";
            
         output += "</tr>"; 

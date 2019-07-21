@@ -219,23 +219,10 @@ function productlistingfromProductionStatus(so_id,segment){
        var price=0;
       
        for(var i=0; i < count; i++){
-           
-           var govt_price = html['recordData'][i]['govt_price'];
-		   var retailer_price = html['recordData'][i]['retailer_price'];
-		    //var product_status = html['recordData'][i]['product_status'];
-           //alert(govt_price);
-           //alert(retailer_price);
-           //alert(product_status);
-		   
-
-		   if(segment == 'retailer'){
-	       var prod_price=retailer_price;
-	       }else{
-	       var prod_price=govt_price;
-	        }
+         var prod_price = html['recordData'][i].rate;
          output += "<tr>";
          output += "<td>"+x+++"</td>";
-         output += "<td>"+html['recordData'][i].product_name+" "+html['recordData'][i].thickness+"mm "+html['recordData'][i].category_name+" ( "+html['recordData'][i].size_feet+")</td>";
+         output += "<td>"+html['recordData'][i].prod_category+" ("+html['recordData'][i].prod_thick+") "+html['recordData'][i].category_name+" ( "+html['recordData'][i].prod_size+")</td>";
          output += "<td>"+html['recordData'][i].quantity+"</td>";
          price = html['recordData'][i].quantity*prod_price;
          output += "<td>"+price+"</td>";

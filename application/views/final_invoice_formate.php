@@ -348,11 +348,11 @@ P.O.BAGHDOGRA DISTT.DARJELLING--><?php echo $billing_address['Details_of_Receive
           <td rowspan="2" class="pro_name" ><?php echo $pro['product_name']; ?></span>  
           </td>
           <td rowspan="2" ><?php echo $pro['hsn_code']; ?></td>
-          <td rowspan="2"><?php echo $pro['thickness']; ?></td>
+          <td rowspan="2"><?php echo $pro['prod_thick']; ?></td>
           <td  rowspan="2"><?php echo $sec_qty= $pro['quantity']; ?></td>
           <td rowspan="2"><?php echo $pro['stock_UOM']; ?></td>
 		  <?php 
-		    $size_feet = $pro['size_feet'];
+		    $size_feet = $pro['prod_size'];
 			$size_feet = str_split($size_feet,1);
 			$height = $size_feet[0];
 			$width = $size_feet[2];
@@ -372,11 +372,9 @@ P.O.BAGHDOGRA DISTT.DARJELLING--><?php echo $billing_address['Details_of_Receive
 		  ?>
           <td rowspan="2"><?php echo $qty; ?></td>
           <td rowspan="2"><?php echo $pro['sale_UOM']; ?></td>
-           <?php if($segment == 'retailer'){
-			  $rate= $pro['retailer_price'];  
-		   }else{
-			  $rate= $pro['govt_price'];   
-		   }?>
+          
+			  <?php $rate= $pro['rate'];  ?>
+		  
            <td rowspan="2"><?php echo $rate; ?></td>
 		   <?php 
 		   

@@ -60,18 +60,14 @@
                       $sumtot=0;
                      $x=1;
                       foreach($product_data as $lis){
-						 $segment = $lis['segment'];
-                          if($segment == 'government'){
-							$pri=$lis['govt_price'];  
-						  }else{
-							$pri=$lis['retailer_price'];  
-						  }					 
+						    $segment = $lis['segment'];
+                           
 						  ?>
                      <tr class="odd gradeX">
                         <td><?php echo $x++; ?></td>
-                        <td><?php echo $lis['category_name']; ?></td>
+                        <td><?php echo $lis['prod_category']; ?></td>
                         <td><?php echo $qty = $lis['quantity']; ?></td>
-                        <td>Rs. <?php echo $pri; ?></td>
+                        <td>Rs. <?php echo $pri = $lis['rate']; ?></td>
                         <td><span><b style="color:green;"><i class="fa fa-inr" aria-hidden="true"></i> <?php echo $sum = $qty*$pri; ?></b></span></td>
                           <?php
                           

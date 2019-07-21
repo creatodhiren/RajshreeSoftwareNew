@@ -30,7 +30,8 @@ class Product_model extends CI_Model {
 	/******end product design name************/
 
  function poSave(){
-     
+     //echo "<pre>";
+     //print_r($_POST); die;
 	$login_data = $this->session->userdata('login_data'); 
     //print_r($login_data);
 	$login_id = $login_data[0]['id'];
@@ -71,12 +72,13 @@ if(empty($last_record)){
  $in_no =  $last_record[0]['id'] + $start;
  $purchase_order_id ='PO/'.$login_id.'/'.date('Y-m-d').'/'.$in_no;
 }
- 	$product_id = $this->input->post('product_id');
- 	$quantity = $this->input->post('quantity');
+    $product_id = $this->input->post('product_id');
+    $quantity = $this->input->post('quantity');
 	$product_name = $this->input->post('product_name');
 	$product_type = $this->input->post('product_type');
 	$product_size = $this->input->post('product_size');
-	$product_color = $this->input->post('product_color');
+    $product_color = $this->input->post('product_color');
+    $product_thick = $this->input->post('product_thickness');
 	$product_grade = $this->input->post('product_grade');
 	$product_design = $this->input->post('product_design');
 	$price = $this->input->post('price');
@@ -95,9 +97,10 @@ if(empty($last_record)){
  		 'status_date'=>$date
  	             );
  	$insert = $this->db->insert('tbl_purchase_order',$insarr);
- 	$insert_id = $this->db->insert_id();
-   $count = count($this->input->post('product_id'));
-
+    $insert_id = $this->db->insert_id(); 
+     
+     $count = count($this->input->post('product_id')); 
+     
    for($x=0;$x<$count;$x++){
    	if(!empty($product_id[$x])){
       $ins = array(
@@ -106,6 +109,7 @@ if(empty($last_record)){
                 'quantity' => $quantity[$x],
                 'prod_category' => $product_name[$x],
                 'prod_type' => $product_type[$x],
+                'prod_thick' => $product_thick[$x],
                 'prod_size' => $product_size[$x],
                 'prod_color' => $product_color[$x],
                 'prod_grade' => $product_grade[$x],
@@ -113,7 +117,8 @@ if(empty($last_record)){
                 'rate' => $price[$x],
                 'total_price' => $total_price[$x]
                   );
-      $insert = $this->db->insert('tbl_po_product_details',$ins);
+     
+     $insert = $this->db->insert('tbl_po_product_details',$ins);
      }
    }
 if($insert){

@@ -132,11 +132,12 @@ input#tot_amount {
                      <tr>
                    <th>S No.</th>
                    <th>Name</th>
-                   <th>type</th>
-                   <th>Size</th>
-                   <th>Color</th>
                    <th>Grade</th>
+                   <th>type</th>
+                   <th>thickness</th>
+                   <th>Color</th>
                    <th>Design</th>
+                   <th>Size</th>
                    <th>Unit Price</th> 
                    <th>Quantity</th>
                    <th>Total Price</th>
@@ -158,21 +159,27 @@ input#tot_amount {
                            </select>
                            <input type="hidden" name="" id="hidd_prod_1" value="">
                            <input type="hidden" name="product_id[]" id="product_id_1" value=""></td>
+                  <td><select name="product_grade[]" id="pgrade_1" class="select_width">
+                              <option value="">Grade</option>
+                           </select></td>
 						<td><select name="product_type[]" id="ptype_1"  class="select_width">
                             <option value="">Prodoct Type</option>
+                           </select></td>
+                  <td><select name="product_thickness[]" id="pthick_1" class="select_width">
+                              <option value="" >Thickness</option>
+                           </select></td>
+                  <td><select name="product_color[]" id="pcolor_1" class="select_width">
+                             <option value="">Color</option>
+                           </select></td>
+
+						<td><select name="product_design[]" id="pdesign_1" class="select_width">
+                              <option value="" >Design</option>
                            </select></td>
 						<td> <select name="product_size[]" id="size_1" class="s_width"  required>
                               <option value="">Select Size</option>
                            </select></td>
-						 <td><select name="product_color[]" id="pcolor_1" class="select_width">
-                             <option value="">Color</option>
-                           </select></td>
-						<td><select name="product_grade[]" id="pgrade_1" class="select_width">
-                              <option value="">Grade</option>
-                           </select></td>
-						<td><select name="product_design[]" id="pdesign_1" class="select_width">
-                              <option value="" >Design</option>
-                           </select></td>
+						
+                  
 						<td><input type="hidden" id="price_hid_1"  value="" name="price[]"><span id="price_1"></span></td>
 						<td><input type="number" onchange="getfinalprice(this.value,'1')" name="quantity[]" class="qty_w" required></td>
 						<td><input type="hidden" id="tot_hid_1" value="" name="total_price[]"><span id="tot_1"></span></td>
@@ -194,22 +201,27 @@ input#tot_amount {
                            </select>
                            <input type="hidden" name="" id="hidd_prod_2" value="">
                            <input type="hidden" name="product_id[]" id="product_id_2" value=""></td>
+                  <td><select name="product_grade[]" id="pgrade_2" class="select_width">
+                              <option value="">Grade</option>
+                           </select></td>
 						<td><select name="product_type[]" id="ptype_2" class="select_width">
                             <option value="">Prodoct Type</option>
+                           </select></td>
+                  <td><select name="product_thickness[]" id="pthick_2" class="select_width">
+                              <option value="" >Thickness</option>
+                           </select></td>
+                  <td><select name="product_color[]" id="pcolor_2" class="select_width">
+                             <option value="">Color</option>
+                           </select></td>
+						
+						<td><select name="product_design[]" id="pdesign_2" class="select_width">
+                              <option value="" >Design</option>
                            </select></td>
 						<td> <select name="product_size[]" id="size_2" class="s_width"  required>
                               <option value="">Select Size</option>
                            </select></td>
-						 <td><select name="product_color[]" id="pcolor_2" class="select_width">
-                             <option value="">Color</option>
-                           </select></td>
-						<td><select name="product_grade[]" id="pgrade_2" class="select_width">
-                              <option value="">Grade</option>
-                           </select></td>
-						<td><select name="product_design[]" id="pdesign_2" class="select_width">
-                              <option value="" >Design</option>
-                           </select></td>
-						<td><input type="hidden" id="price_hid_2"  value="" name="price[]"><span id="price_2"></span></td>
+						
+                  						<td><input type="hidden" id="price_hid_2"  value="" name="price[]"><span id="price_2"></span></td>
 						<td><input type="number" onchange="getfinalprice(this.value,'2')" name="quantity[]" class="qty_w" required></td>
 						<td><input type="hidden" id="tot_hid_2" value="" name="total_price[]"><span id="tot_2"></span></td>
 						
@@ -230,21 +242,27 @@ input#tot_amount {
                            </select>
                            <input type="hidden" name="" id="hidd_prod_3" value="">
                            <input type="hidden" name="product_id[]" id="product_id_3" value=""></td>
-						<td><select name="product_type[]" id="ptype_3" class="select_width">
+                  <td><select name="product_grade[]" id="pgrade_3" class="select_width">
+                              <option value="">Grade</option>
+                           </select></td>
+
+                  <td><select name="product_type[]" id="ptype_3" class="select_width">
                             <option value="">Prodoct Type</option>
                            </select></td>
-						<td> <select name="product_size[]" id="size_3" class="s_width"  required>
-                              <option value="">Select Size</option>
+                  <td><select name="product_thickness[]" id="pthick_3" class="select_width">
+                              <option value="" >Thickness</option>
                            </select></td>
-						 <td><select name="product_color[]" id="pcolor_3" class="select_width">
+                  <td><select name="product_color[]" id="pcolor_3" class="select_width">
                              <option value="">Color</option>
-                           </select></td>
-						<td><select name="product_grade[]" id="pgrade_3" class="select_width">
-                              <option value="">Grade</option>
                            </select></td>
 						<td><select name="product_design[]" id="pdesign_3" class="select_width">
                               <option value="" >Design</option>
                            </select></td>
+
+                  <td> <select name="product_size[]" id="size_3" class="s_width"  required>
+                              <option value="">Select Size</option>
+                           </select></td>
+						                  
 						<td><input type="hidden" id="price_hid_3"  value="" name="price[]"><span id="price_3"></span></td>
 						<td><input type="number" onchange="getfinalprice(this.value,'3')" name="quantity[]" class="qty_w" required></td>
 						<td><input type="hidden" id="tot_hid_3" value="" name="total_price[]"><span id="tot_3"></span></td>
@@ -312,7 +330,7 @@ function add_row1(){
   
 
   var x= parseInt(temp_id)+1;
-  $('#rowappend25').append('<tr id="row_'+x+'"><td>'+x+'</td><td><select name="product_name[]" onchange="getproductprice(this.value,'+x+')" class="select_width" ><option value="" >Select Product Name</option><?php foreach($product_list as $sh){ ?><option value="<?php echo $sh['product_name'];?>"><?php echo $sh['category_name']; ?></option><?php } ?></select><input type="hidden" name="" id="hidd_prod_'+x+'" value=""><input type="hidden" name="product_id[]" id="product_id_'+x+'" value=""></td><td><select name="product_type[]" id="ptype_'+x+'" class="select_width"><option value="">Prodoct Type</option></select></td><td> <select name="product_size[]" id="size_'+x+'" class="s_width"  required><option value="">Select Size</option></select></td><td><select name="product_color[]" id="pcolor_'+x+'" class="select_width"><option value="">Color</option></select></td><td><select name="product_grade[]" id="pgrade_'+x+'" class="select_width"><option value="">Grade</option></select></td><td><select name="product_design[]" id="pdesign_'+x+'" class="select_width"><option value="" >Design</option></select></td><td><input type="hidden" id="price_hid_'+x+'"  value="" name="price[]"><span id="price_'+x+'"></span></td><td><input type="number" onchange="getfinalprice(this.value,'+x+')" name="quantity[]" class="qty_w" required></td><td><input type="hidden" id="tot_hid_'+x+'" value="" name="total_price[]"><span id="tot_'+x+'"></span></td></tr>');
+  $('#rowappend25').append('<tr id="row_'+x+'"><td>'+x+'</td><td><select name="product_name[]" onchange="getproductprice(this.value,'+x+')" class="select_width" ><option value="" >Select Product Name</option><?php foreach($product_list as $sh){ ?><option value="<?php echo $sh['product_name'];?>"><?php echo $sh['category_name']; ?></option><?php } ?></select><input type="hidden" name="" id="hidd_prod_'+x+'" value=""><input type="hidden" name="product_id[]" id="product_id_'+x+'" value=""></td><td><select name="product_grade[]" id="pgrade_'+x+'" class="select_width"><option value="">Grade</option></select></td><td><select name="product_type[]" id="ptype_'+x+'" class="select_width"><option value="">Prodoct Type</option></select></td><td><select name="product_thickness[]" id="pthick_'+x+'" class="select_width"><option value="" >Thickness</option></select></td><td><select name="product_color[]" id="pcolor_'+x+'" class="select_width"><option value="">Color</option></select></td><td><select name="product_design[]" id="pdesign_'+x+'" class="select_width"><option value="" >Design</option></select></td><td> <select name="product_size[]" id="size_'+x+'" class="s_width"  required><option value="">Select Size</option></select></td><td><input type="hidden" id="price_hid_'+x+'"  value="" name="price[]"><span id="price_'+x+'"></span></td><td><input type="number" onchange="getfinalprice(this.value,'+x+')" name="quantity[]" class="qty_w" required></td><td><input type="hidden" id="tot_hid_'+x+'" value="" name="total_price[]"><span id="tot_'+x+'"></span></td></tr>');
 }
 
 
