@@ -28,12 +28,14 @@ echo $data1= $this->Common_model->productdelete($id);
 }
 
 public function productPrice(){
-$data1['type']= $this->Common_model->getproductpodata('product_type');
-$data1['size']= $this->Common_model->getproductpodata('size_feet');
-$data1['color']= $this->Common_model->getproductpodata('color');
-$data1['grade']= $this->Common_model->getproductpodata('grade');
-$data1['design']= $this->Common_model->getproductpodata('design');
-$data1['id']= $this->Common_model->getproductpodataid();
+ 
+  $data1= $this->Common_model->getproductpodata();
+//$data1['type']= $this->Common_model->getproductpodata('product_type');
+// $data1['size']= $this->Common_model->getproductpodata('size_feet');
+// $data1['color']= $this->Common_model->getproductpodata('color');
+// $data1['grade']= $this->Common_model->getproductpodata('grade');
+// $data1['design']= $this->Common_model->getproductpodata('design');
+// $data1['id']= $this->Common_model->getproductpodataid();
 echo json_encode($data1);
 }
 /*****************Product Listing********************************/

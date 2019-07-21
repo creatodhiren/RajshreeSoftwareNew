@@ -28,12 +28,12 @@ $this->db->where('product_id',$id);
 
 }
 
-function getproductpodata($val){
-  $product_name = $this->input->post('id');
-  $this->db->select($val);
+function getproductpodata(){
+  $id = $this->input->post('id');
+  $this->db->select('*');
   $this->db->from('tbl_product_details');
-  $this->db->where("product_name",$product_name);
-  $this->db->group_by($val);
+  $this->db->where("product_name",$id);
+  //$this->db->group_by($val);
   $query = $this->db->get(); 
   return $query->result_array();
   

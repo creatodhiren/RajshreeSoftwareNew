@@ -155,52 +155,54 @@ function getproductprice(id,row){
   dataType: "json",
    success: function(data){
 	var id='';
-	var id = data.id[0]['id'];
+  var id = data[0]['id'];
+  alert(id);
     var selOptstype = "";
     var selOptsize = "";
     var selOptcolor = "";
     var selOptgrade = "";
     var selOptdesign = "";
-	
+    var product_type = data[0]['product_type'];
+    $('#ptype_'+row).html(product_type);
 			//product type
-            for (i=0;i<data.type.length;i++)
-            {
-                var product_type = data.type[i]['product_type'];
-                selOptstype += "<option value='"+product_type+"'>"+product_type+"</option>";
-            }
-            $('#ptype_'+row).html(selOptstype);
+            // for (i=0;i<data.type.length;i++)
+            // {
+            //     var product_type = data.type[i]['product_type'];
+            //     selOptstype += "<option value='"+product_type+"'>"+product_type+"</option>";
+            // }
+            // $('#ptype_'+row).html(selOptstype);
 			
 			//product size
-			for (i=0;i<data.size.length;i++)
-            {
-                var size = data.size[i]['size_feet'];
-                selOptsize += "<option value='"+size+"'>"+size+"</option>";
-            }
-            $('#size_'+row).html(selOptsize);
+			// for (i=0;i<data.size.length;i++)
+      //       {
+      //           var size = data.size[i]['size_feet'];
+      //           selOptsize += "<option value='"+size+"'>"+size+"</option>";
+      //       }
+      //       $('#size_'+row).html(selOptsize);
 			
 			//product color
-			for (i=0;i<data.color.length;i++)
-            {
-                var color = data.color[i]['color'];
-                selOptcolor += "<option value='"+color+"'>"+color+"</option>";
-            }
-            $('#pcolor_'+row).html(selOptcolor);
+			// for (i=0;i<data.color.length;i++)
+      //       {
+      //           var color = data.color[i]['color'];
+      //           selOptcolor += "<option value='"+color+"'>"+color+"</option>";
+      //       }
+      //       $('#pcolor_'+row).html(selOptcolor);
 			
-			//product grade
-			for (i=0;i<data.grade.length;i++)
-            {
-                var grade = data.grade[i]['grade'];
-                selOptgrade += "<option value='"+grade+"'>"+grade+"</option>";
-            }
-            $('#pgrade_'+row).html(selOptgrade);
+			// //product grade
+			// for (i=0;i<data.grade.length;i++)
+      //       {
+      //           var grade = data.grade[i]['grade'];
+      //           selOptgrade += "<option value='"+grade+"'>"+grade+"</option>";
+      //       }
+      //       $('#pgrade_'+row).html(selOptgrade);
 			
-			//product design
-			for (i=0;i<data.design.length;i++)
-            {
-                var design = data.design[i]['design'];
-                selOptdesign += "<option value='"+design+"'>"+design+"</option>";
-            }
-            $('#pdesign_'+row).html(selOptdesign);
+			// //product design
+			// for (i=0;i<data.design.length;i++)
+      //       {
+      //           var design = data.design[i]['design'];
+      //           selOptdesign += "<option value='"+design+"'>"+design+"</option>";
+      //       }
+      //       $('#pdesign_'+row).html(selOptdesign);
 			
            
            
@@ -210,8 +212,8 @@ function getproductprice(id,row){
    //$('#pdesign_'+row).html(design);
   
    
-   $('#hidd_prod_'+row).val(id);
-    getSingleProductPrice(size,row);
+   //$('#hidd_prod_'+row).val(id);
+   // getSingleProductPrice(size,row);
 	
     /*$('#price_'+row).html(data);
     $('#price_hid_'+row).val(data);

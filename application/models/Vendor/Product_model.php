@@ -1,7 +1,7 @@
 <?php
 class Product_model extends CI_Model {
 
-    function getProductList(){
+  /*  function getProductList(){
      $this->db->select('tpd.id,tpd.product_name,tpd.product_type,tpd.grade,tpd.design,tpd.thickness,tpd.width,tpd.height,tpd.category_id,tpod.option_id,tpc.category_name,tpo.option_name');
     $this->db->from('tbl_product_details tpd');
     $this->db->join('tbl_product_option_details tpod','tpd.id=tpod.product_id');
@@ -11,7 +11,13 @@ class Product_model extends CI_Model {
 	$this->db->group_by('tpd.product_name');
     $query = $this->db->get(); 
     return $query->result_array();   
-    }
+    }*/
+
+    function getProductList(){
+        $query=  $this->db->query("SELECT tpd.color,tpd.thickness , tpd.image_name,tpd.product_name,tpd.size_feet, tpc.category_name ,tpd.govt_price,tpd.retailer_price,tpd.id FROM `tbl_product_details` as tpd join tbl_product_category as tpc on tpd.category_id=tpc.id");
+       $query=  $query->result_array(); 
+        return $query;
+     }
 	/*******select product design name************/
 	function getProductDesignNameById($id){
      $this->db->select('*');
